@@ -1,5 +1,5 @@
 import com.kudlaienko.parser.Xml;
-import com.kudlaienko.parser.engine.xml.parser.token.XmlTokenFactory;
+import com.kudlaienko.parser.engine.xml.ParserDecorator;
 import com.kudlaienko.parser.engine.xml.property.Document;
 import com.kudlaienko.parser.shell.exceptions.ParseException;
 import com.kudlaienko.parser.shell.exceptions.ValidationException;
@@ -15,14 +15,13 @@ public class Main {
     }
 
     private static void xmlParseFile() throws ParseException, ValidationException, IOException {
-        Xml xml = new Xml(XmlTokenFactory.getDocumentToken());
-        Document document = xml.parse(Paths.get("/Users/artemkudlaienko/Documents/test.xml \n"));
-//        Document document = xml.parse(Paths.get("~/Documents/test.xml"));
+        Xml xml = new Xml(ParserDecorator.getDocumentParser());
+        Document document = xml.parse(Paths.get("~/Documents/test.xmltest.xml \n"));
         System.out.println(document);
     }
 
     private static void xmlParseMem() throws ParseException, ValidationException {
-        Xml xml = new Xml(XmlTokenFactory.getDocumentToken());
+        Xml xml = new Xml(ParserDecorator.getDocumentParser());
         String content = "<?xml version=\"1.1\" encoding=\"UTF-8\" ?>\n\n" +
                 "<main>\n" +
                 "<objects>\n" +

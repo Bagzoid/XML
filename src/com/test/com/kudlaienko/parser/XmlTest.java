@@ -1,17 +1,15 @@
 package com.kudlaienko.parser;
 
-import com.kudlaienko.parser.engine.xml.parser.token.XmlTokenFactory;
+import com.kudlaienko.parser.engine.xml.ParserDecorator;
 import com.kudlaienko.parser.engine.xml.property.Document;
 import com.kudlaienko.parser.engine.xml.property.Tag;
 import com.kudlaienko.parser.shell.exceptions.ParseException;
 import com.kudlaienko.parser.shell.exceptions.ValidationException;
-import com.kudlaienko.parser.shell.service.CompoundValidator;
-import com.kudlaienko.parser.shell.service.Parser;
-import com.kudlaienko.parser.shell.service.Validator;
+import com.kudlaienko.parser.shell.CompoundValidator;
+import com.kudlaienko.parser.shell.Validator;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 
 public class XmlTest {
@@ -19,7 +17,7 @@ public class XmlTest {
 
     @Before
     public void setUp() {
-        xml = new Xml(XmlTokenFactory.getDocumentToken());
+        xml = new Xml(ParserDecorator.getDocumentParser());
     }
 
     @Test

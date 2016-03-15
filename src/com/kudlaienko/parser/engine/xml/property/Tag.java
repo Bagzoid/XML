@@ -1,15 +1,15 @@
 package com.kudlaienko.parser.engine.xml.property;
 
 
-import com.kudlaienko.parser.shell.nodes.NodeAttributes;
-import com.kudlaienko.parser.shell.nodes.NodeList;
-import com.kudlaienko.parser.shell.nodes.NodeNamedValue;
+import com.kudlaienko.parser.shell.interfaces.NodeAttributes;
+import com.kudlaienko.parser.shell.interfaces.NodeList;
+import com.kudlaienko.parser.shell.interfaces.NodeName;
+import com.kudlaienko.parser.shell.interfaces.NodeValue;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.StringJoiner;
 
-public class Tag implements NodeNamedValue<String>, NodeList<Tag>, NodeAttributes<Attribute> {
+public class Tag implements NodeName, NodeValue<String>, NodeList<Tag>, NodeAttributes<Attribute> {
 
     private final String name;
     private final String value;

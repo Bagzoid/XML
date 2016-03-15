@@ -1,11 +1,11 @@
 package com.kudlaienko.parser;
 
-import com.kudlaienko.parser.engine.xml.parser.token.DocumentToken;
+import com.kudlaienko.parser.engine.xml.parser.DocumentParser;
 import com.kudlaienko.parser.engine.xml.property.Document;
 import com.kudlaienko.parser.engine.xml.property.Tag;
 import com.kudlaienko.parser.shell.exceptions.ParseException;
 import com.kudlaienko.parser.shell.exceptions.ValidationException;
-import com.kudlaienko.parser.shell.service.Validator;
+import com.kudlaienko.parser.shell.Validator;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,14 +13,14 @@ import java.nio.file.Path;
 import java.util.stream.Collectors;
 
 public class Xml {
-    private final DocumentToken documentToken;
+    private final DocumentParser documentParser;
 
-    public Xml(DocumentToken documentToken) {
-        this.documentToken = documentToken;
+    public Xml(DocumentParser documentParser) {
+        this.documentParser = documentParser;
     }
 
     public Document parse(String content, Validator<Tag> validator) throws ParseException, ValidationException {
-        Document document = documentToken.parse(content).getValue();
+        Document document = documentParser.parse(content).getValue();
         if (validator != null) {
             validateEachTag(document.getMainTag(), validator);
         }
