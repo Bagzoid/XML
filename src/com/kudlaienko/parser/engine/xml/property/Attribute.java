@@ -21,4 +21,12 @@ public class Attribute implements NodeName, NodeValue<String> {
     public String getName() {
         return name;
     }
+
+    @Override
+    public String toString() {
+        return "Attribute{" +
+                "name='" + name + '\'' +
+                ", value='" + value + '\'' +
+                '}';
+    }
 }
