@@ -27,6 +27,6 @@ final public class AttributeParser extends CustomToken<String, Attribute> {
 
     @Override
     protected void init() {
-        pattern = Pattern.compile("[\\s]*([A-Za-z_0-9]+)[\\s]*=[\\s]*[\"]([A-Za-z_0-9\\.\\s;&]*)[\"][\\s]*");
+        pattern = Pattern.compile("[\\s]*([A-Za-z_0-9]+)[\\s]*=[\\s]*[\"]([A-Za-z_0-9\\.\\s;&=]*?)[\"][\\s]*");
     }
 }

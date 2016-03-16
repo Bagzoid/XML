@@ -1,12 +1,12 @@
 package com.kudlaienko.parser.engine.xml.parser.enums;
 
-public enum SpecialCharacter {
-    LT("<", "&lt;"), GT(">", "&gt;"), AMP("&", "&amp;");
+public enum TextSpecialCharacter {
+    LT("<", "&lt;"), GT(">", "&gt;"), AMP("&", "&amp;"), APOS("'", "&apos;"), QUOTE("\"", "&quot;");
 
     private final String encodedValue;
     private final String codedValue;
 
-    SpecialCharacter(String encodedValue, String codedValue) {
+    TextSpecialCharacter(String encodedValue, String codedValue) {
         this.encodedValue = encodedValue;
         this.codedValue = codedValue;
     }

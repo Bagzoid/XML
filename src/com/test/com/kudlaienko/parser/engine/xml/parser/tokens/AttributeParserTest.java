@@ -33,4 +33,13 @@ public class AttributeParserTest {
         assertEquals("value", attribute.getName());
         assertEquals(">da&ta<", attribute.getValue());
     }
+
+    @Test
+    public void testParseWithSpecialCharsQuoteValid() throws Exception {
+        String content = "value=\"&apos;a&apos;==&quot;b&quot;\"";
+        Attribute attribute = attributeParser.parse(content).getValue();
+
+        assertEquals("value", attribute.getName());
+        assertEquals("'a'==\"b\"", attribute.getValue());
+    }
 }
