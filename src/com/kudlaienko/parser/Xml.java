@@ -33,8 +33,13 @@ public class Xml {
     }
 
     public Document parse(Path path) throws ParseException, ValidationException, IOException {
+        Validator<Tag> tagValidator = null;
+        return parse(path, tagValidator);
+    }
+
+    public Document parse(Path path, Validator<Tag> validator) throws ParseException, ValidationException, IOException {
         String content = Files.readAllLines(path).stream().collect(Collectors.joining());
-        return parse(content);
+        return parse(content, validator);
     }
 
     private void validateEachTag(Tag tag, Validator<Tag> validator) throws ValidationException {
