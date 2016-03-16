@@ -12,8 +12,8 @@ What is supported:
 * attributes
 * CDATA blocks
 * comments (skipping)
+* text special character
 
 What is not supported:
-* text special character
 * DOCTYPE
 * processing instruction
