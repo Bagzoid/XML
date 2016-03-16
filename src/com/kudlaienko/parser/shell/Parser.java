@@ -48,7 +48,7 @@ public abstract class Parser<C, R> {
      * @param content  to be checked
      * @param start    position
      * @param consumer for successfully parsed data
-     * @return
+     * @return true if content can be parsed
      */
     final public boolean isParsable(C content, int start, Consumer<ParseResult<R>> consumer) {
         try {
@@ -80,13 +80,13 @@ public abstract class Parser<C, R> {
     /***
      * Parse data for all tokens
      *
-     * @param content
-     * @param start
-     * @return
+     * @param content to be parsed
+     * @param start position
+     * @return List of parsed data
      */
     final public List<ParseResult<R>> parseAll(C content, int start) {
         List<ParseResult<R>> result = new ArrayList<>();
-        forEachParsed(content, start, (r) -> result.add(r));
+        forEachParsed(content, start, result::add);
         return result;
     }
 
@@ -101,7 +101,7 @@ public abstract class Parser<C, R> {
     protected abstract ParseResult<R> doParse(C content, int start) throws ParseException;
 
     /***
-     * Initialization before parsing
+     * Initialization before parsing. Called once before first parse
      */
     protected abstract void init();
 
