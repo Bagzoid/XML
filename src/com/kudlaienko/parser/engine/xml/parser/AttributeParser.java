@@ -1,6 +1,7 @@
 package com.kudlaienko.parser.engine.xml.parser;
 
 import com.kudlaienko.parser.engine.xml.parser.tokens.CustomToken;
+import com.kudlaienko.parser.engine.xml.parser.tools.XmlStrings;
 import com.kudlaienko.parser.engine.xml.property.Attribute;
 import com.kudlaienko.parser.shell.exceptions.ParseException;
 import com.kudlaienko.parser.shell.ParseResult;
@@ -19,13 +20,13 @@ final public class AttributeParser extends CustomToken<String, Attribute> {
 
         int parserPos = matcher.start() + matcher.group().length();
         String name = matcher.group(1);
-        String value = matcher.group(2);
+        String value = XmlStrings.encodeSpecialValues(matcher.group(2));
 
         return new ParseResult<>(new Attribute(name, value), parserPos);
     }
 
     @Override
     protected void init() {
-        pattern = Pattern.compile("[\\s]*([A-Za-z_0-9]+)[\\s]*[=][\\s]*[\"]([A-Za-z_0-9\\.\\s]*)[\"][\\s]*");
+        pattern = Pattern.compile("[\\s]*([A-Za-z_0-9]+)[\\s]*=[\\s]*[\"]([A-Za-z_0-9\\.\\s;&=]*?)[\"][\\s]*");
     }
 }

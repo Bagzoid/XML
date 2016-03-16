@@ -1,5 +1,6 @@
 package com.kudlaienko.parser.engine.xml.parser.tokens;
 
+import com.kudlaienko.parser.engine.xml.parser.tools.XmlStrings;
 import com.kudlaienko.parser.shell.exceptions.ParseException;
 import com.kudlaienko.parser.shell.ParseResult;
 import com.kudlaienko.parser.shell.Parser;
@@ -40,20 +41,24 @@ public class TagTextToken extends CustomToken<String, String> {
     }
 
     private ParseResult<String> parseText(String content, int start) throws ParseException {
-        Matcher matcher = textPattern.matcher(content);
-        int afterCommentPos = parseComments(content, start);
-        if (afterCommentPos > start) {
-            return new ParseResult<>("", afterCommentPos);
+        String result;
+        int newParserPos = parseComments(content, start);
+        if (newParserPos > start) {
+            return new ParseResult<>("", newParserPos);
         }
-        if (!matcher.find(start) || matcher.start() != start) {
+
+        Matcher matcher = textPattern.matcher(content);
+        if (matcher.find(start) && matcher.start() == start) {
+            result = XmlStrings.encodeSpecialValues(matcher.group("text"));
+        } else {
             matcher = cdataPattern.matcher(content);
             if (!matcher.find(start) || matcher.start() != start)
                 throw new ParseException("Tag content parsing failed: " + content);
+            result =matcher.group("text");
         }
 
-        int parserPos = matcher.start() + matcher.group().length();
-        String value = matcher.group("text");
-        return new ParseResult<>(value, parserPos);
+        newParserPos = matcher.start() + matcher.group().length();
+        return new ParseResult<>(result, newParserPos);
     }
 
     @Override
