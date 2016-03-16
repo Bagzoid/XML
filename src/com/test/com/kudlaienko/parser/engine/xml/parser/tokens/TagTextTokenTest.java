@@ -75,10 +75,11 @@ public class TagTextTokenTest {
     }
 
     @Test
-    public void testTextWithAmpersandValid() throws Exception {
+    public void testTextWithSpecialCharacterValid() throws Exception {
         String text = "abc&lt;def";
+        String expectedParseResult = "abc<def";
         ParseResult<String> parseResult = tagTextToken.parse(text);
-        assertEquals(text, parseResult.getValue());
+        assertEquals(expectedParseResult, parseResult.getValue());
         assertEquals(text.length(), parseResult.getParserPos());
     }
 }

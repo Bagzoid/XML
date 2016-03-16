@@ -17,11 +17,20 @@ public class AttributeParserTest {
     }
 
     @Test
-    public void testParse() throws Exception {
+    public void testParseValid() throws Exception {
         String content = "value=\"1.0\"";
         Attribute attribute = attributeParser.parse(content).getValue();
 
         assertEquals("value", attribute.getName());
         assertEquals("1.0", attribute.getValue());
+    }
+
+    @Test
+    public void testParseWithSpecialCharsValid() throws Exception {
+        String content = "value=\"&gt;da&amp;ta&lt;\"";
+        Attribute attribute = attributeParser.parse(content).getValue();
+
+        assertEquals("value", attribute.getName());
+        assertEquals(">da&ta<", attribute.getValue());
     }
 }

@@ -33,6 +33,42 @@ public class TagParserTest {
     }
 
     @Test
+    public void testParseOneSpecialCharacterValid() throws Exception {
+        String content = "<abc>data&lt;</abc>";
+        ParseResult<Tag> parseResult = tagFullToken.parse(content);
+        Tag tag = parseResult.getValue();
+        assertEquals("abc", tag.getName());
+        assertEquals("data<", tag.getValue());
+        assertTrue(tag.getAttributes().isEmpty());
+        assertTrue(tag.getValues().isEmpty());
+        assertEquals(content.length(), parseResult.getParserPos());
+    }
+
+    @Test
+    public void testParseMultiSpecialCharactersValid() throws Exception {
+        String content = "<abc>&gt;da&amp;ta&lt;</abc>";
+        ParseResult<Tag> parseResult = tagFullToken.parse(content);
+        Tag tag = parseResult.getValue();
+        assertEquals("abc", tag.getName());
+        assertEquals(">da&ta<", tag.getValue());
+        assertTrue(tag.getAttributes().isEmpty());
+        assertTrue(tag.getValues().isEmpty());
+        assertEquals(content.length(), parseResult.getParserPos());
+    }
+
+    @Test
+    public void testParseMultiSpecialCharactersWithCDATAValid() throws Exception {
+        String content = "<abc>&gt;da&amp;ta&lt; - <![CDATA[&gt;da&amp;ta&lt;]]></abc>";
+        ParseResult<Tag> parseResult = tagFullToken.parse(content);
+        Tag tag = parseResult.getValue();
+        assertEquals("abc", tag.getName());
+        assertEquals(">da&ta< - &gt;da&amp;ta&lt;", tag.getValue());
+        assertTrue(tag.getAttributes().isEmpty());
+        assertTrue(tag.getValues().isEmpty());
+        assertEquals(content.length(), parseResult.getParserPos());
+    }
+
+    @Test
     public void testParseWithCommentValid() throws Exception {
         String content = "<abc><!--comment before-->da<!--comment inside-->ta<!--comment after--></abc>";
         ParseResult<Tag> parseResult = tagFullToken.parse(content);
