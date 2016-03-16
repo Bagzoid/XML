@@ -9,8 +9,7 @@ import com.kudlaienko.parser.shell.exceptions.ParseException;
 import com.kudlaienko.parser.shell.ParseResult;
 import com.kudlaienko.parser.shell.Parser;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Parser for tag construction e.g. <tag id="1">Text</id>
@@ -101,9 +100,16 @@ public class TagParser extends CustomToken<String, Tag> {
     private int parseAttributes(String content, int start, TagBuilder tagBuilder) throws ParseException {
         int parserPos = start;
         List<Attribute> attributes = new ArrayList<>();
+        Set<String> atributeNames = new HashSet<>();
         for (ParseResult<Attribute> attribute : attributeParser.parseAll(content, start)) {
-            parserPos = attribute.getParserPos();
+            String attributeName = attribute.getValue().getName();
+            boolean attributAdded = atributeNames.add(attributeName);
+            if (!attributAdded) {
+                throw new ParseException("Dublicated attribute name: " + attributeName +
+                        " at pos " + parserPos);
+            }
             attributes.add(attribute.getValue());
+            parserPos = attribute.getParserPos();
         }
         if (!attributes.isEmpty()) {
             tagBuilder.setAttributes(attributes);

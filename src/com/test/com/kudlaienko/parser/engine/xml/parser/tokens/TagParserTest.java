@@ -165,4 +165,10 @@ public class TagParserTest {
         String content = "<abc>data";
         tagFullToken.parse(content);
     }
+
+    @Test(expected = ParseException.class)
+    public void testParseWithDublicatedKeysFailed() throws Exception {
+        String content = "<abc id=\"1\" id=\"2\"/>";
+        tagFullToken.parse(content).getValue();
+    }
 }
