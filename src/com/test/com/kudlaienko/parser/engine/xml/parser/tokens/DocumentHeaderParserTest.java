@@ -1,6 +1,6 @@
 package com.kudlaienko.parser.engine.xml.parser.tokens;
 
-import com.kudlaienko.parser.engine.xml.ParserDecorator;
+import com.kudlaienko.parser.engine.xml.ParserFactoryImpl;
 import com.kudlaienko.parser.shell.exceptions.ParseException;
 import com.kudlaienko.parser.shell.ParseResult;
 import com.kudlaienko.parser.shell.Parser;
@@ -16,7 +16,7 @@ public class DocumentHeaderParserTest {
 
     @Before
     public void setUp() {
-        tagHeaderToken = ParserDecorator.getDocumentHeaderParser();
+        tagHeaderToken = new ParserFactoryImpl().getDocumentHeaderParser();
     }
 
     @Test

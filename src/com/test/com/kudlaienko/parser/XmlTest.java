@@ -1,6 +1,6 @@
 package com.kudlaienko.parser;
 
-import com.kudlaienko.parser.engine.xml.ParserDecorator;
+import com.kudlaienko.parser.engine.xml.ParserFactoryImpl;
 import com.kudlaienko.parser.engine.xml.property.Document;
 import com.kudlaienko.parser.engine.xml.property.Tag;
 import com.kudlaienko.parser.shell.exceptions.ParseException;
@@ -17,7 +17,7 @@ public class XmlTest {
 
     @Before
     public void setUp() {
-        xml = new Xml(ParserDecorator.getDocumentParser());
+        xml = new Xml(new ParserFactoryImpl().getDocumentParser());
     }
 
     @Test
@@ -38,7 +38,7 @@ public class XmlTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void parseTestFailed() throws ParseException, ValidationException {
+    public void parseValidationTestFailed() throws ParseException, ValidationException {
         String content = "<?xml version=\"1.1\" encoding=\"UTF-8\" ?>\n\n" +
                 "<main>\n" +
                 "<objects>\n" +
@@ -93,7 +93,7 @@ public class XmlTest {
     }
 
     @Test(expected = ValidationException.class)
-    public void parseTestCompundObjectsFailed() throws ParseException, ValidationException {
+    public void parseTestCompoundObjectsFailed() throws ParseException, ValidationException {
         String content = "<?xml version=\"1.1\" encoding=\"UTF-8\" ?>\n\n" +
                 "<main>\n" +
                 "<objects>\n" +

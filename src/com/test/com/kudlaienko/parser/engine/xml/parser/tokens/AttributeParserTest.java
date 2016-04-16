@@ -1,6 +1,6 @@
 package com.kudlaienko.parser.engine.xml.parser.tokens;
 
-import com.kudlaienko.parser.engine.xml.ParserDecorator;
+import com.kudlaienko.parser.engine.xml.ParserFactoryImpl;
 import com.kudlaienko.parser.engine.xml.property.Attribute;
 import com.kudlaienko.parser.shell.Parser;
 import org.junit.Before;
@@ -13,7 +13,7 @@ public class AttributeParserTest {
 
     @Before
     public void setUp() {
-        attributeParser = ParserDecorator.getAttributeParser();
+        attributeParser = new ParserFactoryImpl().getAttributeParser();
     }
 
     @Test

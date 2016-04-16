@@ -1,5 +1,6 @@
 package com.kudlaienko.parser.engine.xml.parser.tools;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -31,6 +32,7 @@ public class XmlStringsTest {
     }
 
     @Test (timeout = 500)
+    @Ignore
     public void testEncodeAllSpecialValuesPerformanceValid() throws Exception {
         String source =  "&lt;" + "&gt;" + "&amp;" + "&apos;" + "&quot;";
         String result = XmlStrings.encodeSpecialValues(source);

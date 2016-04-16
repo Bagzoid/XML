@@ -6,7 +6,7 @@ import com.kudlaienko.parser.engine.xml.parser.tokens.TagCloseWithNameToken;
 import com.kudlaienko.parser.engine.xml.parser.tokens.TagOpenNameToken;
 import com.kudlaienko.parser.engine.xml.parser.tokens.TagTextToken;
 
-public class ParserDecorator {
+public class ParserFactoryImpl implements ParserFactory {
     private static AttributeParser attributeParser;
     private static DocumentParser documentParser;
     private static TagCloseBracketToken tagCloseBracketToken;
@@ -17,14 +17,16 @@ public class ParserDecorator {
     private static TagTextToken tagTextToken;
     private static CommentParser commentParser;
 
-    public static AttributeParser getAttributeParser() {
+    @Override
+    public AttributeParser getAttributeParser() {
         if (attributeParser == null) {
             attributeParser = new AttributeParser();
         }
         return attributeParser;
     }
 
-    public static DocumentParser getDocumentParser() {
+    @Override
+    public DocumentParser getDocumentParser() {
         if (documentParser == null) {
             DocumentHeaderParser documentHeaderParser = getDocumentHeaderParser();
             TagParser tagParser = getTagParser();
@@ -33,21 +35,24 @@ public class ParserDecorator {
         return documentParser;
     }
 
-    public static TagCloseBracketToken getTagCloseBracketToken() {
+    @Override
+    public TagCloseBracketToken getTagCloseBracketToken() {
         if (tagCloseBracketToken == null) {
             tagCloseBracketToken = new TagCloseBracketToken();
         }
         return tagCloseBracketToken;
     }
 
-    public static TagCloseWithNameToken getTagCloseWithNameToken() {
+    @Override
+    public TagCloseWithNameToken getTagCloseWithNameToken() {
         if (tagCloseWithNameToken == null) {
             tagCloseWithNameToken = new TagCloseWithNameToken();
         }
         return tagCloseWithNameToken;
     }
 
-    public static TagParser getTagParser() {
+    @Override
+    public TagParser getTagParser() {
         if (tagParser == null) {
             TagTextToken tagTextToken = getTagTextToken();
             TagCloseWithNameToken tagCloseWithNameToken = getTagCloseWithNameToken();
@@ -61,21 +66,24 @@ public class ParserDecorator {
         return tagParser;
     }
 
-    public static DocumentHeaderParser getDocumentHeaderParser() {
+    @Override
+    public DocumentHeaderParser getDocumentHeaderParser() {
         if (documentHeaderParser == null) {
             documentHeaderParser = new DocumentHeaderParser();
         }
         return documentHeaderParser;
     }
 
-    public static TagOpenNameToken getTagOpenNameToken() {
+    @Override
+    public TagOpenNameToken getTagOpenNameToken() {
         if (tagOpenNameToken == null) {
             tagOpenNameToken = new TagOpenNameToken();
         }
         return tagOpenNameToken;
     }
 
-    public static TagTextToken getTagTextToken() {
+    @Override
+    public TagTextToken getTagTextToken() {
         if (tagTextToken == null) {
             CommentParser commentParser = getCommentParser();
             tagTextToken = new TagTextToken(commentParser);
@@ -83,7 +91,8 @@ public class ParserDecorator {
         return tagTextToken;
     }
 
-    public static CommentParser getCommentParser() {
+    @Override
+    public CommentParser getCommentParser() {
         if (commentParser == null) {
             commentParser = new CommentParser();
         }

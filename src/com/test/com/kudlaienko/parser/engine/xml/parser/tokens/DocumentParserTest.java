@@ -1,6 +1,6 @@
 package com.kudlaienko.parser.engine.xml.parser.tokens;
 
-import com.kudlaienko.parser.engine.xml.ParserDecorator;
+import com.kudlaienko.parser.engine.xml.ParserFactoryImpl;
 import com.kudlaienko.parser.engine.xml.property.Document;
 import com.kudlaienko.parser.engine.xml.property.Tag;
 import com.kudlaienko.parser.shell.ParseResult;
@@ -27,7 +27,7 @@ public class DocumentParserTest {
 
     @Before
     public void setUp() {
-        xmlParser = ParserDecorator.getDocumentParser();
+        xmlParser = new ParserFactoryImpl().getDocumentParser();
     }
 
     @After

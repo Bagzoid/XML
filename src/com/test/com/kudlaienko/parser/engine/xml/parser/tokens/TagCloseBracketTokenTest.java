@@ -1,7 +1,7 @@
 package com.kudlaienko.parser.engine.xml.parser.tokens;
 
+import com.kudlaienko.parser.engine.xml.ParserFactoryImpl;
 import com.kudlaienko.parser.engine.xml.parser.enums.Bracket;
-import com.kudlaienko.parser.engine.xml.ParserDecorator;
 import com.kudlaienko.parser.shell.ParseResult;
 import com.kudlaienko.parser.shell.Parser;
 import org.junit.Before;
@@ -15,7 +15,7 @@ public class TagCloseBracketTokenTest {
 
     @Before
     public void setUp() {
-        bracketParser = ParserDecorator.getTagCloseBracketToken();
+        bracketParser = new ParserFactoryImpl().getTagCloseBracketToken();
     }
 
     @Test

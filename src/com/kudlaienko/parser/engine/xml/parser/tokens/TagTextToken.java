@@ -34,7 +34,7 @@ public class TagTextToken extends CustomToken<String, String> {
                 stringBuilder.append(text.getValue());
             }
         } catch (ParseException e) {
-
+//TODO: revise
         }
 
         return new ParseResult<>(stringBuilder.toString().trim(), pos);

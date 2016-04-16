@@ -1,6 +1,6 @@
 package com.kudlaienko.parser.engine.xml.parser.tokens;
 
-import com.kudlaienko.parser.engine.xml.ParserDecorator;
+import com.kudlaienko.parser.engine.xml.ParserFactoryImpl;
 import com.kudlaienko.parser.shell.ParseResult;
 import com.kudlaienko.parser.shell.Parser;
 import org.junit.Before;
@@ -15,7 +15,7 @@ public class TagTextTokenTest {
 
     @Before
     public void setUp() {
-        tagTextToken = ParserDecorator.getTagTextToken();
+        tagTextToken = new ParserFactoryImpl().getTagTextToken();
     }
 
     @Test

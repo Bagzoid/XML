@@ -1,6 +1,6 @@
 package com.kudlaienko.parser.engine.xml.parser.tokens;
 
-import com.kudlaienko.parser.engine.xml.ParserDecorator;
+import com.kudlaienko.parser.engine.xml.ParserFactoryImpl;
 import com.kudlaienko.parser.shell.exceptions.ParseException;
 import com.kudlaienko.parser.shell.ParseResult;
 import com.kudlaienko.parser.shell.Parser;
@@ -15,7 +15,7 @@ public class CommentParserTest {
 
     @Before
     public void setUp() {
-        commentParser = ParserDecorator.getCommentParser();
+        commentParser = new ParserFactoryImpl().getCommentParser();
     }
 
     @Test

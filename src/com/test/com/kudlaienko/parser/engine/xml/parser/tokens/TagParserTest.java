@@ -1,6 +1,6 @@
 package com.kudlaienko.parser.engine.xml.parser.tokens;
 
-import com.kudlaienko.parser.engine.xml.ParserDecorator;
+import com.kudlaienko.parser.engine.xml.ParserFactoryImpl;
 import com.kudlaienko.parser.engine.xml.property.Tag;
 import com.kudlaienko.parser.shell.exceptions.ParseException;
 import com.kudlaienko.parser.shell.ParseResult;
@@ -17,7 +17,7 @@ public class TagParserTest {
 
     @Before
     public void setUp() {
-        tagFullToken = ParserDecorator.getTagParser();
+        tagFullToken = new ParserFactoryImpl().getTagParser();
     }
 
     @Test
